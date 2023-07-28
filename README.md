@@ -1,10 +1,10 @@
 `情境：使用 Terrform快速建立VM `
-## 1. 建立 API Token
+## （一） 建立 API Token
 `datacenter` --> `Permissions` --> `API Tokens` ->`Add`  
 ![](https://hackmd.io/_uploads/r1gP7hgon.png)
 ![](https://hackmd.io/_uploads/r1QFm3gih.png)
 
-## 2. 撰寫 terraform
+## （二） 撰寫 terraform
 [Proxmox Provider參數查閱](https://registry.terraform.io/providers/Telmate/proxmox/latest/docs)
 
 `main.tf` - 主要執行文件，盡量避免敏感資訊。
@@ -40,7 +40,7 @@ provider "proxmox" {
 }
 
 ```
-初始化
+#### 1.初始化
 ```bash=
 terraform init
 ```
@@ -51,7 +51,7 @@ proxmox_api_url = "https://domain/api2/json"
 proxmox_token_id = "User@pam!Token ID"
 proxmox_token_secret = "Secret"
 ```
-建立VM
+#### 2.建立VM
 `srv-vm.tf` - 建立VM的描述檔
 ```haskell=
 
@@ -79,14 +79,14 @@ resource "proxmox_vm_qemu" "AIO_vm" {
     os_type     = "ubuntu"
 }
 ```
----
-2. 測試/查看修改
+
+#### 3. 測試/查看變化
 ```bash=
 # 可以查看變化,所有參數和測試文件是否有錯誤
 terraform plan
 ```
 
-2. 執行
+#### 4. 執行
 ```
 terraform apply -auto-approve
 ```
